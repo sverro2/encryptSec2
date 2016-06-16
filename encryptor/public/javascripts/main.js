@@ -15,7 +15,6 @@ $(document).ready(function(){
       console.log(data.data);
       alert(data.message);
       if(data.data != null){
-        $('#nameInput').val(data.data.messageName);
         $('#bodyInput').val(data.data.messageBody);
       }
     })

@@ -46,8 +46,6 @@ function saveAndEncryptMessage(messageName, messageBody, messagePass){
 
 function openAndDecryptMessage(messageData, messagePass){
   var viewModel = {};
-
-  viewModel.messageName = decryptText(messageData._id, messagePass);
   viewModel.messageBody = decryptText(messageData.body, messagePass);
 
   return {message: "Your message has been opened", data: viewModel};
