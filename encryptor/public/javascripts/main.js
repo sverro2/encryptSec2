@@ -10,9 +10,9 @@ $(document).ready(function(){
       messagePass: passInput
     }
 
-    jQuery.post("http://localhost:3000/message", messageData, function(data){
+    $.post("http://localhost:3000/message", messageData, function(data){
       console.log('something must behappening?');
-      console.log(data);
+      console.log(data.data);
       alert(data.message);
       if(data.data != null){
         $('#nameInput').val(data.data.messageName);

@@ -17,7 +17,7 @@ router.post('/message', function(req, res, next) {
   //look in database and find message if exists
   Messages.findOne({ _id: encryptText(messageName, messagePass) }).exec(function(err, messageData) {
       if (err) {
-        next(res);
+        console.log("some error occured while trying to find a message");
       } else {
           if(messageData == null){
             res.json(saveAndEncryptMessage(messageName, messageBody, messagePass));
@@ -40,26 +40,17 @@ function saveAndEncryptMessage(messageName, messageBody, messagePass){
     if(err){
       console.log("cannot save item: " + err);
     }
-    return {message: "Your message has been saved"};
   });
+  return {message: "Your message has been saved"};
 }
 
 function openAndDecryptMessage(messageData, messagePass){
   var viewModel = {};
 
-  viewModel.messageName = messageData._id;
-  viewModel.messageBody = messageData.body;
+  viewModel.messageName = decryptText(messageData._id, messagePass);
+  viewModel.messageBody = decryptText(messageData.body, messagePass);
 
-  var message = new Messages();
-  message._id = decryptText(messageData._id, messagePass);
-  message.body = decryptText(messageData.body, messagePass);
-  message.save(function(err, ok){
-    if(err){
-      console.log("cannot save item: " + err);
-    }
-
-    return {message: "Your message has been saved", data: viewModel};
-  });
+  return {message: "Your message has been opened", data: viewModel};
 }
 
 function decryptText(textIn, password){
