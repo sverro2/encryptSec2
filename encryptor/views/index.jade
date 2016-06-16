@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+  p Sent and receive your encrypted message. Documents can only be created once.
+  p When you want to open a submitted document, just enter the name and password of your submition and we'll decrypt the message for you.
+  p
+    b
+      "Warning: we will not be able to recover your data when you lost your document name and/or password."
+  div
+    input(type="text", placeholder="name", id="nameInput")
+  div
+    textarea(cols="100", rows="40", placeholder="your message", id="bodyInput")
+  div
+    input(type="text", placeholder="password", id="passInput")
+    input(type="button", value="Get/Send Message", id="submit")
